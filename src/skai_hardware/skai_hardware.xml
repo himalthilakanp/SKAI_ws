@@ -1,0 +1,14 @@
+<library path="skai_hardware">
+
+  <class
+    name="skai_hardware/SKAIHardware"
+    type="skai_hardware::SKAIHardware"
+    base_class_type="hardware_interface::SystemInterface">
+
+    <description>
+      SKAI Hardware Interface
+    </description>
+
+  </class>
+
+</library>

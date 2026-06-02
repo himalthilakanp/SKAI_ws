@@ -1,0 +1,44 @@
+rm -rf build install log
+
+ros2 launch skai_moveit_config demo.launch.py
+
+ros2 launch skai_control moveit_controller.launch.py
+
+ros2 run skai_gui gui_node
+
+
+
+//////////////////////////////////////////////////////////////////////
+
+Terminal 1 — CAN bus (one time)
+
+
+sudo ip link set can0 up type can bitrate 250000
+ip link show can0
+Terminal 2 — full stack (MoveIt + ros2_control + hardware)
+
+
+source /opt/ros/jazzy/setup.bash
+source /home/smallpapaya/SKAI_ws/install/setup.bash
+ros2 launch skai_control moveit_controller.launch.py
+Wait until you see:
+
+
+[moveit_controller_node]: MoveIt controller ready
+[skai_hardware]: ODrive CLOSED_LOOP sent
+Terminal 3 — dashboard GUI
+
+
+source /opt/ros/jazzy/setup.bash
+source /home/smallpapaya/SKAI_ws/install/setup.bash
+ros2 run skai_dashboard dashboard
+Verify in the GUI
+
+What to check Expected
+Left panel LEDs Turn green (closed loop, data flowing)
+Right panel joint cards Show live rad and turns values from encoder
+Controller status arm_controller ACTIVE in green
+3D visualizer Arm drawn at current joint positions
+Test IK — in the center panel, enter X=0.30  Y=0.00  Z=0.40 and click SEND IK GOAL. Watch the 3D arm move to the planned pose.
+
+Test E-STOP — click the red button. LEDs turn yellow (online but inactive). Click RESUME to re-arm.

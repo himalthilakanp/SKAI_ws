@@ -1,0 +1,1 @@
+ros2 launch skai_dashboard dashboard.launch.py

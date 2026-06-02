@@ -1,0 +1,6 @@
+Visualization Manager:
+  Global Options:
+    Fixed Frame: base_link
+Displays:
+  - Class: rviz_default_plugins/RobotModel
+    Name: RobotModel
