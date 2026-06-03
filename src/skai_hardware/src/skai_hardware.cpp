@@ -129,6 +129,30 @@ SKAIHardware::on_init(
 
 
 /*
+ * ON ACTIVATE — runs once before the real-time loop starts.
+ * Safe to block here; overruns are not tracked yet.
+ */
+
+hardware_interface::CallbackReturn
+SKAIHardware::on_activate(
+  const rclcpp_lifecycle::State & /*previous_state*/
+)
+{
+  clear_errors();
+  usleep(100000);
+  set_closed_loop();
+  usleep(100000);
+
+  commands_seeded_ = false;
+
+  std::cout << "SKAI Hardware activated" << std::endl;
+
+  return hardware_interface::CallbackReturn::SUCCESS;
+}
+
+
+
+/*
  * CLEAR ODRIVE ERRORS
  */
 
@@ -321,7 +345,7 @@ SKAIHardware::read(
 
   auto deadline =
     std::chrono::steady_clock::now()
-    + std::chrono::milliseconds(10);
+    + std::chrono::milliseconds(3);
 
 
 
@@ -410,10 +434,16 @@ SKAIHardware::read(
          * Encoder is on output shaft, no gear ratio needed.
          */
 
-        position_states_[i] =
+        double radians =
           static_cast<double>(
             output_turns * 2.0f * static_cast<float>(M_PI)
           );
+
+        const std::string & jname = info_.joints[i].name;
+        if (jname == "PITCH_1" || jname == "PITCH_2")
+          radians = -radians;
+
+        position_states_[i] = radians;
 
         received[i] = true;
         received_count++;
@@ -455,25 +485,6 @@ SKAIHardware::write(
 {
 
   /*
-   * STARTUP SEQUENCE — runs once on the first write(), regardless of send gate.
-   * Puts ODrive into closed-loop so the arm holds its current physical position.
-   */
-
-  if (!startup_done_)
-  {
-
-    clear_errors();
-
-    usleep(100000);
-
-    set_closed_loop();
-
-    usleep(100000);
-
-    startup_done_ = true;
-  }
-
-  /*
    * SEND GATE — position commands are only sent after the user presses a
    * send button (publishes true to /can_send_enable).
    */
@@ -513,6 +524,10 @@ SKAIHardware::write(
 
     float joint_radians =
       position_commands_[i];
+
+    const std::string & jname = info_.joints[i].name;
+    if (jname == "PITCH_1" || jname == "PITCH_2")
+      joint_radians = -joint_radians;
 
     /*
      * ODrive uses output encoder for position control,

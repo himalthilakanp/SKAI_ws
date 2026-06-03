@@ -8,17 +8,17 @@
     name="BASE">
     <inertial>
       <origin
-        xyz="-0.064016 -0.080031 0.11562"
+        xyz="-0.064016 0.11562 0.080031"
         rpy="0 0 0" />
       <mass
         value="1.1031" />
       <inertia
         ixx="0.0023261"
-        ixy="0.0001122"
-        ixz="-1.4598E-06"
-        iyy="0.0023583"
-        iyz="5.3023E-06"
-        izz="0.0024963" />
+        ixy="-1.4598E-06"
+        ixz="-0.0001122"
+        iyy="0.0024963"
+        iyz="-5.3023E-06"
+        izz="0.0023583" />
     </inertial>
     <visual>
       <origin
@@ -88,7 +88,7 @@
     name="ROT_1"
     type="revolute">
     <origin
-      xyz="-0.067 -0.065 0.0820000000000001"
+      xyz="-0.067 -0.065 0.082"
       rpy="0 0 0" />
     <parent
       link="BASE" />
@@ -146,8 +146,8 @@
     name="PITCH_1"
     type="revolute">
     <origin
-      xyz="0 -0.0459999999999999 0.194000000000002"
-      rpy="-1.5707963267949 0.523598775598295 0" />
+      xyz="0 -0.046 0.194"
+      rpy="-1.5708 0.5236 0" />
     <parent
       link="J_1" />
     <child
@@ -155,10 +155,10 @@
     <axis
       xyz="0 0 -1" />
     <limit
-      lower="-3.14"
-      upper="0"
-      effort="0"
-      velocity="0" />
+      lower="0"
+      upper="3.14"
+      effort="10"
+      velocity="0.1" />
   </joint>
   <link
     name="J_3">
@@ -204,14 +204,14 @@
     name="PITCH_2"
     type="revolute">
     <origin
-      xyz="-0.371524898223531 0.214500000000008 0.103"
-      rpy="3.14159265358979 0 -0.523598775598295" />
+      xyz="-0.37152 0.2145 0.103"
+      rpy="3.1416 0 -0.5236" />
     <parent
       link="J_2" />
     <child
       link="J_3" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 1 0" />
     <limit
       lower="-2.61"
       upper="2.61"
@@ -271,26 +271,26 @@
     <axis
       xyz="0 0 1" />
     <limit
-      lower="-6.28"
-      upper="6.28"
-      effort="0"
-      velocity="0" />
+      lower="-2.61"
+      upper="2.61"
+      effort="10"
+      velocity="0.1" />
   </joint>
   <link
     name="J_5">
     <inertial>
       <origin
-        xyz="-0.11768 2.9601E-05 0.030153"
+        xyz="-0.010689 -0.028195 -0.053684"
         rpy="0 0 0" />
       <mass
         value="0.26391" />
       <inertia
-        ixx="0.00049256"
-        ixy="2.9096E-08"
-        ixz="3.2028E-05"
-        iyy="0.00047196"
-        iyz="5.4897E-08"
-        izz="0.00044783" />
+        ixx="0.00046898"
+        ixy="-7.9386E-06"
+        ixz="-1.1352E-05"
+        iyy="0.00045081"
+        iyz="-2.9949E-05"
+        izz="0.00049256" />
     </inertial>
     <visual>
       <origin
@@ -320,14 +320,14 @@
     name="ROT_2"
     type="revolute">
     <origin
-      xyz="0.00088397 0.0023385 -0.0725"
-      rpy="0 0 -1.9322" />
+      xyz="0.023514 0.062204 -0.0725"
+      rpy="-1.5708 0.3614 2.7802" />
     <parent
       link="J_4" />
     <child
       link="J_5" />
     <axis
-      xyz="1 0 0" />
+      xyz="0 0 -1" />
     <limit
       lower="-6.28"
       upper="6.28"
@@ -378,8 +378,8 @@
     name="ROT_3"
     type="revolute">
     <origin
-      xyz="-0.139499963386566 -1.48215814215757E-05 0.347396030273288"
-      rpy="0 0 0" />
+      xyz="-0.12282 -0.32496 -0.0755"
+      rpy="1.9322 -1.5708 0" />
     <parent
       link="J_5" />
     <child

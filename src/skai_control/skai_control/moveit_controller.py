@@ -13,7 +13,6 @@ from moveit_msgs.action import MoveGroup
 from moveit_msgs.msg import (
     Constraints,
     PositionConstraint,
-    OrientationConstraint,
     BoundingVolume
 )
 
@@ -35,22 +34,22 @@ class MoveItController(Node):
 
 
 
-        self.subscription = \
-            self.create_subscription(
-                TargetPose,
-                "/target_pose",
-                self.target_callback,
-                10
-            )
+        # self.subscription = \
+        #     self.create_subscription(
+        #         TargetPose,
+        #         "/target_pose",
+        #         self.target_callback,
+        #         10
+        #     )
 
 
 
-        self.move_group_client = \
-            ActionClient(
-                self,
-                MoveGroup,
-                "/move_action"
-            )
+        # self.move_group_client = \
+        #     ActionClient(
+        #         self,
+        #         MoveGroup,
+        #         "/move_action"
+        #     )
 
 
 
@@ -178,40 +177,6 @@ class MoveItController(Node):
 
 
 
-        orientation_constraint = \
-            OrientationConstraint()
-
-
-
-        orientation_constraint.header.frame_id = \
-            "BASE"
-
-
-
-        orientation_constraint.link_name = "J_6"
-
-
-
-        orientation_constraint.orientation.w = 1.0
-
-
-
-        orientation_constraint.absolute_x_axis_tolerance = 0.1
-        orientation_constraint.absolute_y_axis_tolerance = 0.1
-        orientation_constraint.absolute_z_axis_tolerance = 0.1
-
-
-
-        orientation_constraint.weight = 1.0
-
-
-
-        constraints.orientation_constraints.append(
-            orientation_constraint
-        )
-
-
-
         goal_request.goal_constraints.append(
             constraints
         )
@@ -288,11 +253,19 @@ class MoveItController(Node):
 
         result = future.result().result
 
+        error_code = result.error_code.val
 
+        if error_code == 1:
 
-        self.get_logger().info(
-            "Motion completed"
-        )
+            self.get_logger().info(
+                "Motion completed successfully"
+            )
+
+        else:
+
+            self.get_logger().error(
+                f"Motion failed — MoveIt error code: {error_code}"
+            )
 
 
 

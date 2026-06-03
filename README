@@ -1,1 +1,4 @@
 ros2 launch skai_dashboard dashboard.launch.py
+
+ros2 launch skai_control moveit_controller.launch.py
+

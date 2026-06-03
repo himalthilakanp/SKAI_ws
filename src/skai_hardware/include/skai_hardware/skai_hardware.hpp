@@ -69,6 +69,14 @@ public:
 
 
 
+  hardware_interface::CallbackReturn on_activate(
+
+    const rclcpp_lifecycle::State & previous_state
+
+  ) override;
+
+
+
   std::vector<hardware_interface::StateInterface>
   export_state_interfaces() override;
 
@@ -154,8 +162,6 @@ private:
   /*
    * STARTUP FLAGS
    */
-
-  bool startup_done_ = false;
 
   bool commands_seeded_ = false;
 
