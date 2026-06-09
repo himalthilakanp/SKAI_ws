@@ -21,10 +21,9 @@ find_package(std_msgs REQUIRED)
 add_library(
 
   skai_hardware
-
   SHARED
-
   src/skai_hardware.cpp
+  src/odrive_driver.cpp
 
 )
 

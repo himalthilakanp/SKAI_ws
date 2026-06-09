@@ -5,20 +5,20 @@
 <robot
   name="skai_arm">
   <link
-    name="BASE">
+    name="base_link">
     <inertial>
       <origin
-        xyz="-0.064016 -0.080031 0.11562"
+        xyz="6.661E-05 -6.7654E-05 -0.0023074"
         rpy="0 0 0" />
       <mass
-        value="1.1031" />
+        value="49.417" />
       <inertia
-        ixx="0.0023261"
+        ixx="19.424"
         ixy="0.0001122"
         ixz="-1.4598E-06"
-        iyy="0.0023583"
+        iyy="19.424"
         iyz="5.3023E-06"
-        izz="0.0024963" />
+        izz="38.846" />
     </inertial>
     <visual>
       <origin
@@ -29,9 +29,9 @@
           filename="package://arm_rviz/meshes/BASE.STL" />
       </geometry>
       <material
-        name="">
+        name="gray">
         <color
-          rgba="0.7451 0.73725 0.72941 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -69,7 +69,7 @@
           filename="package://arm_rviz/meshes/J_1.STL" />
       </geometry>
       <material
-        name="">
+        name="gray">
         <color
           rgba="0.7451 0.73725 0.72941 1" />
       </material>
@@ -88,10 +88,10 @@
     name="ROT_1"
     type="revolute">
     <origin
-      xyz="-0.067 -0.065 0.0820000000000001"
+      xyz="0 0.012 0.082"
       rpy="0 0 0" />
     <parent
-      link="BASE" />
+      link="base_link" />
     <child
       link="J_1" />
     <axis
@@ -127,7 +127,7 @@
           filename="package://arm_rviz/meshes/J_2.STL" />
       </geometry>
       <material
-        name="">
+        name="gray">
         <color
           rgba="0.7451 0.73725 0.72941 1" />
       </material>
@@ -146,8 +146,8 @@
     name="PITCH_1"
     type="revolute">
     <origin
-      xyz="0 -0.0459999999999999 0.194000000000002"
-      rpy="-1.5707963267949 0.523598775598295 0" />
+      xyz="0 -0.046 0.194"
+      rpy="-1.5708 0.5236 0" />
     <parent
       link="J_1" />
     <child
@@ -157,8 +157,8 @@
     <limit
       lower="-3.14"
       upper="0"
-      effort="0"
-      velocity="0" />
+      effort="10"
+      velocity="0.1" />
   </joint>
   <link
     name="J_3">
@@ -185,7 +185,7 @@
           filename="package://arm_rviz/meshes/J_3.STL" />
       </geometry>
       <material
-        name="">
+        name="gray">
         <color
           rgba="1 1 0 1" />
       </material>
@@ -204,8 +204,8 @@
     name="PITCH_2"
     type="revolute">
     <origin
-      xyz="-0.371524898223531 0.214500000000008 0.103"
-      rpy="3.14159265358979 0 -0.523598775598295" />
+      xyz="-0.37152 0.2145 0.103"
+      rpy="3.1416 0 -0.5236" />
     <parent
       link="J_2" />
     <child
@@ -215,8 +215,8 @@
     <limit
       lower="-2.61"
       upper="2.61"
-      effort="0"
-      velocity="0" />
+      effort="10"
+      velocity="0.1" />
   </joint>
   <link
     name="J_4">
@@ -243,7 +243,7 @@
           filename="package://arm_rviz/meshes/J_4.STL" />
       </geometry>
       <material
-        name="">
+        name="gray">
         <color
           rgba="0.79216 0.81961 0.93333 1" />
       </material>
@@ -262,8 +262,8 @@
     name="PITCH_3"
     type="revolute">
     <origin
-      xyz="-0.409 0 -0.016"
-      rpy="0 0 1.9322" />
+      xyz="-0.408999999999995 0 -0.0160000000000003"
+      rpy="0 0 1.93219930379001" />
     <parent
       link="J_3" />
     <child
@@ -271,26 +271,26 @@
     <axis
       xyz="0 0 1" />
     <limit
-      lower="-6.28"
-      upper="6.28"
-      effort="0"
-      velocity="0" />
+      lower="-3.14"
+      upper="3.14"
+      effort="10"
+      velocity="0.1" />
   </joint>
   <link
     name="J_5">
     <inertial>
       <origin
-        xyz="-0.11768 2.9601E-05 0.030153"
+        xyz="-0.010801 -0.028638 -0.054011"
         rpy="0 0 0" />
       <mass
-        value="0.26391" />
+        value="0.26474" />
       <inertia
-        ixx="0.00049256"
-        ixy="2.9096E-08"
-        ixz="3.2028E-05"
-        iyy="0.00047196"
-        iyz="5.4897E-08"
-        izz="0.00044783" />
+        ixx="0.00046905"
+        ixy="-7.8272E-06"
+        ixz="-1.1352E-05"
+        iyy="0.00045114"
+        iyz="-2.9949E-05"
+        izz="0.0004929" />
     </inertial>
     <visual>
       <origin
@@ -301,7 +301,7 @@
           filename="package://arm_rviz/meshes/J_5.STL" />
       </geometry>
       <material
-        name="">
+        name="gray">
         <color
           rgba="0.79216 0.81961 0.93333 1" />
       </material>
@@ -320,17 +320,17 @@
     name="ROT_2"
     type="revolute">
     <origin
-      xyz="0.00088397 0.0023385 -0.0725"
-      rpy="0 0 -1.9322" />
+      xyz="0.023514 0.062204 -0.0725"
+      rpy="-1.5708 0.3614 2.7802" />
     <parent
       link="J_4" />
     <child
       link="J_5" />
     <axis
-      xyz="1 0 0" />
+      xyz="0 0 -1" />
     <limit
-      lower="-6.28"
-      upper="6.28"
+      lower="-3.14"
+      upper="3.14"
       effort="10"
       velocity="0.1" />
   </joint>
@@ -338,17 +338,17 @@
     name="J_6">
     <inertial>
       <origin
-        xyz="0.0023984 0.00010598 -0.19247"
+        xyz="-0.0023982 -8.4489E-05 -0.19286"
         rpy="0 0 0" />
       <mass
-        value="0.39709" />
+        value="0.3973" />
       <inertia
-        ixx="0.0003213"
-        ixy="1.0368E-06"
-        ixz="6.6171E-09"
-        iyy="0.00024325"
-        iyz="-6.346E-08"
-        izz="0.0002605" />
+        ixx="0.00032473"
+        ixy="6.6401E-07"
+        ixz="-4.714E-08"
+        iyy="0.00024386"
+        iyz="-5.5297E-09"
+        izz="0.00026347" />
     </inertial>
     <visual>
       <origin
@@ -359,7 +359,7 @@
           filename="package://arm_rviz/meshes/J_6.STL" />
       </geometry>
       <material
-        name="">
+        name="gray">
         <color
           rgba="0.79216 0.81961 0.93333 1" />
       </material>
@@ -378,17 +378,17 @@
     name="ROT_3"
     type="revolute">
     <origin
-      xyz="-0.139499963386566 -1.48215814215757E-05 0.347396030273288"
-      rpy="0 0 0" />
+      xyz="-0.12301 -0.32542 -0.0695"
+      rpy="1.221 -1.5708 0" />
     <parent
       link="J_5" />
     <child
       link="J_6" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
-      lower="-6.28"
-      upper="6.28"
+      lower="-3.14"
+      upper="3.14"
       effort="10"
       velocity="0.1" />
   </joint>

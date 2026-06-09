@@ -5,15 +5,14 @@ moveit_setup_assistant_config:
   srdf:
     relative_path: config/skai_arm.srdf
   package_settings:
-    author_name: 123@123.com
-    author_email: 123@123.com
-    generated_timestamp: 1778222890
+    author_name: todo
+    author_email: todo@todo.com
+    generated_timestamp: 1780990512
   control_xacro:
     command:
       - position
     state:
       - position
-      - velocity
   modified_urdf:
     xacros:
       - control_xacro
@@ -22,4 +21,3 @@ moveit_setup_assistant_config:
       - position
     state:
       - position
-      - velocity

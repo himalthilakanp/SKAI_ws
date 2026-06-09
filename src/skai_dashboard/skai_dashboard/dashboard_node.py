@@ -120,6 +120,8 @@ class DashboardNode(Node):
 
         self.create_subscription(JointState, '/joint_states', self._on_joint_states, 10)
 
+        self.create_subscription(JointTrajectory, '/planned_trajectory', self._on_planned_trajectory, 10)
+
         self._can_enable_pub = self.create_publisher(Bool,           '/can_send_enable',                    10)
         self._target_pub     = self.create_publisher(TargetPose,     '/target_pose',                        10)
         self._traj_pub       = self.create_publisher(JointTrajectory,'/arm_controller/joint_trajectory',    10)
@@ -138,6 +140,22 @@ class DashboardNode(Node):
                     self._joint_positions[name] = pos
                     self._joint_update_counts[name] += 1
             self._joint_last_ts = time.time()
+
+    def _on_planned_trajectory(self, msg):
+
+        self.get_logger().info(
+            f"Received planned trajectory with "
+            f"{len(msg.points)} points"
+        )
+
+        for point in msg.points:
+            point.velocities = []
+            point.accelerations = []
+            point.effort = []
+
+        self._set_can_send(True)
+
+        self._traj_pub.publish(msg)
 
     def _poll_controller_state(self):
         if not self._list_cli.service_is_ready():
